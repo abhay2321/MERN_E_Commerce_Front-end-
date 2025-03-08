@@ -1,8 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../Context/AppContext'
+import ShowOrderProduct from '../ShowOrderProduct'
 
 function Profile() {
     const { user } = useContext(AppContext)
+
+    const {userOrder} = useContext(AppContext)
+    const [latestOrder, setLatestOrder] = useState({})
+    useEffect(() => {
+         if(userOrder){
+             setLatestOrder(userOrder[0])
+         }
+    },[userOrder])
+  //  console.log("Profile Data:-", latestOrder)
 
   return (
     <>
@@ -10,10 +20,43 @@ function Profile() {
 
         <h1>Welcome, {user?.name}!</h1>
         <h3>Email: {user?.email}</h3>
-       
-        {/* <button className="btn btn-primary">Edit Profile</button>
-        <button className="btn btn-danger ml-3">Logout</button>
-        <button className="btn btn-success ml-3">Change Password</button> */}
+
+<div className="container">
+
+<table className="table table-bordered border-primary">
+  <thead>
+    <tr>
+      <th scope="col" className="bg-dark text-light text-center">
+        OrderedItems
+      </th>
+      <th scope="col" className="bg-dark text-light text-center">
+        Order Confirmation Details
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="bg-dark text-light">
+        <ShowOrderProduct items={latestOrder?.orderItems} />
+      </td>
+      <td className="bg-dark text-light">
+        <ul className="text-start" style={{ fontWeight: "bold"  }}>
+          <li>OrderId : {latestOrder?.orderId}</li>
+          <li>PaymentId : {latestOrder?.paymentId}</li>
+          <li>Payment Status : {latestOrder?.payStatus}</li>
+          <li>FullName : {latestOrder?.userShipping?.fullName}</li>
+          <li>Phone : {latestOrder?.userShipping?.phoneNumber}</li>
+          <li>City : {latestOrder?.userShipping?.city}</li>
+          <li>State : {latestOrder?.userShipping?.state}</li>
+          <li>Country : {latestOrder?.userShipping?.country}</li>
+          <li>PinCode : {latestOrder?.userShipping?.pincode} </li>
+          <li>Near By : {latestOrder?.userShipping?.address}</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
      </div>
     </>
