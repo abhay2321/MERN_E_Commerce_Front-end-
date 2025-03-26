@@ -17,9 +17,9 @@ const RelatedProduct = ({ category }) => {
         <h1 className="soft-shadow"> Related Products of {category}</h1>
 
         <div className="container d-flex justify-content-center align-items-center">
-    <div className="row d-flex justify-content-center align-items-center my-5">
+        <div className="row d-flex justify-content-center align-items-center my-5">
     {relatedProduct?.map((product) => (
-        <div key={product._id} className="my-3 col-md-4 d-flex justify-content-center align-items-center">
+        <div key={product._id} className="my-3 col md-4 d-flex justify-content-center align-items-center">
           <div className="card bg-dark text-light text-center" style={{ width: "18rem" }}>
             <Link to={`/product/${product._id}`} className="d-flex justify-content-center align-items-center p-3">
               <img
@@ -31,7 +31,7 @@ const RelatedProduct = ({ category }) => {
             </Link>
             <div className="card-body">
               <h5 className="card-title">{product.title}</h5>
-              <p className="card-text">{product.description.length > 30 ? product?.description.slice(0, 30) + "..." : product?.description}</p>
+              <p className="card-text">{product.description.length > 25 ? product?.description.slice(0, 25) + "..." : product?.description}</p>
 
             <div className="my-3">
               <button className="btn btn-primary">
