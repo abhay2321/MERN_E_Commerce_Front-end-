@@ -50,14 +50,12 @@ const RelatedProduct = ({ category }) => {
               > Add to Cart
               </button>
               </div>
-
             </div>
           </div>
         </div>
       ))}
     </div>
     </div>
-
       </div>
     </>
   );
